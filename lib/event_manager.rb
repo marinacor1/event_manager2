@@ -34,15 +34,7 @@ class FileCheck
   end
 
   def zipcode_check(zipcode)
-    if zipcode.length > 5
-      zipcode = zipcode[0..4]
-    elsif zipcode.length < 5
-      zipcode = zipcode.rjust(5,'0')
-    else
-      zipcode
-    end
-    zipcode
-  end
+    zipcode.to_s.rjust(5, "0")[0..4]
 end
 
   #if the zip code is exactly five digits, assume that its ok
