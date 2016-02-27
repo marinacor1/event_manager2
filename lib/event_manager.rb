@@ -1,3 +1,4 @@
+require 'pry'
 require 'csv'
 puts "EventManager Initialized!"
 
@@ -17,10 +18,35 @@ puts "EventManager Initialized!"
 #   name = columns[2]
 #   puts name
 # end
+class FileCheck
+  def file_read
+    contents = CSV.open 'event_attendees.csv', headers: true, header_converters: :symbol
+    contents.each do |row|
+      name = row[:first_name]
+      zipcode = row[:zipcode]
+      zipcode = zipcode_check(zipcode)
+      puts "#{name} #{zipcode}"
+    end
+  end
 
-contents = CSV.open 'event_attendees.csv', headers: true, header_converters: :symbol
-contents.each do |row|
-  name = row[:first_name]
-  zipcode = row[:zipcode]
-  puts "#{name} #{zipcode}"
+  def zipcode_check(zipcode)
+    if zipcode.nil?
+      zipcode = '00000'
+    elsif zipcode.length > 5
+      zipcode = zipcode.chop
+      zipcode_check(zipcode)
+    elsif zipcode.length < 5
+      zipcode = zipcode.rjust(5,'0')
+    else
+      zipcode
+    end
+    zipcode
+  end
 end
+
+  #if the zip code is exactly five digits, assume that its ok
+  #if the zip code is more than 5 digits, truncate it to the first 5 digits
+  #if the zip code is less than 5 digits, add zeros to the front until it becomes five digits
+
+fc = FileCheck.new
+fc.file_read
