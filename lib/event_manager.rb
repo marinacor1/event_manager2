@@ -33,8 +33,9 @@ class FileCheck
     if zipcode.nil?
       zipcode = '00000'
     elsif zipcode.length > 5
-      zipcode = zipcode.chop
-      zipcode_check(zipcode)
+      # zipcode = zipcode.chop
+      # zipcode_check(zipcode)
+      zipcode = zipcode[0..4]
     elsif zipcode.length < 5
       zipcode = zipcode.rjust(5,'0')
     else
