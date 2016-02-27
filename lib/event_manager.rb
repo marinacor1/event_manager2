@@ -23,8 +23,7 @@ class FileCheck
     contents = CSV.open 'event_attendees.csv', headers: true, header_converters: :symbol
     contents.each do |row|
       name = row[:first_name]
-      zipcode = row[:zipcode]
-      zipcode = zipcode_check(zipcode)
+      zipcode = zipcode_check(row[:zipcode])
       puts "#{name} #{zipcode}"
     end
   end
@@ -33,8 +32,6 @@ class FileCheck
     if zipcode.nil?
       zipcode = '00000'
     elsif zipcode.length > 5
-      # zipcode = zipcode.chop
-      # zipcode_check(zipcode)
       zipcode = zipcode[0..4]
     elsif zipcode.length < 5
       zipcode = zipcode.rjust(5,'0')
