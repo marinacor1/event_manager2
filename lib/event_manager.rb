@@ -35,6 +35,7 @@ class FileCheck
 
   def zipcode_check(zipcode)
     zipcode.to_s.rjust(5, "0")[0..4]
+  end
 end
 
   #if the zip code is exactly five digits, assume that its ok
