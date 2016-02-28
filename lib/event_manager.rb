@@ -21,7 +21,7 @@ end
 
   contents = CSV.open 'event_attendees.csv', headers: true, header_converters: :symbol
   template_letter = File.read "form_letter.html"
-
+  erb_template = ERB.new(template_letter)
   contents.each do |row|
     name = row[:first_name]
     zipcode = clean_zipcode(row[:zipcode])
