@@ -1,6 +1,7 @@
 require 'csv'
 require 'sunlight/congress'
 require 'erb'
+require 'pry'
 
 Sunlight::Congress.api_key = "e179a6973728c4dd3fb1204283aaccb5"
 
@@ -29,6 +30,7 @@ end
 
     contents.each do |row|
       id = row[0]
+      binding.pry
       name = row[:first_name]
       zipcode = clean_zipcode(row[:zipcode])
       legislators = legislators_by_zipcode(zipcode)
