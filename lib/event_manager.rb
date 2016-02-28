@@ -43,6 +43,7 @@ contents.each do |row|
       legislator_name = "#{legislator.first_name} #{legislator.last_name}"
       legislator_names.push(legislator_name)
     end
-      puts "#{name} #{zipcode} #{legislator_names}"
-    
+    legislator_string = legislator_names.join(",")
+      puts "#{name} #{zipcode} #{legislator_string}"
+
     end
