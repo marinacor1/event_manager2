@@ -1,6 +1,8 @@
 require 'pry'
 require 'csv'
-puts "EventManager Initialized!"
+require 'sunlight/congress'
+
+Sunlight::Congress.api_key = "e179a6973728c4dd3fb1204283aaccb5"
 
 # lines = File.readlines "event_attendees.csv"
 # lines.each do |line|
@@ -23,12 +25,7 @@ class FileCheck
     contents = CSV.open 'event_attendees.csv', headers: true, header_converters: :symbol
     contents.each do |row|
       name = row[:first_name]
-      zipcode = row[:zipcode]
-        if zipcode.nil?
-          zipcode = '00000'
-        else
-          zipcode = zipcode_check(row[:zipcode])
-        end
+      zipcode = zipcode_check(row[:zipcode])
       puts "#{name} #{zipcode}"
     end
   end
@@ -37,10 +34,7 @@ class FileCheck
     zipcode.to_s.rjust(5, "0")[0..4]
   end
 end
-
-  #if the zip code is exactly five digits, assume that its ok
-  #if the zip code is more than 5 digits, truncate it to the first 5 digits
-  #if the zip code is less than 5 digits, add zeros to the front until it becomes five digits
+puts "EventManager Initialized!"
 
 fc = FileCheck.new
 fc.file_read
